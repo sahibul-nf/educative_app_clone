@@ -1,5 +1,7 @@
-import 'package:educative_app_clone/colors.dart';
 import 'package:educative_app_clone/models/course.dart';
+import 'package:educative_app_clone/themes/colors.dart';
+import 'package:educative_app_clone/themes/typography.dart';
+import 'package:educative_app_clone/widgets/level_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -47,7 +49,7 @@ class _CourseCardState extends ConsumerState<CourseCard> {
                 children: [
                   Text(
                     widget.course.title,
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: MyTypography.titleMedium,
                   ),
                   const SizedBox(height: 10),
                   Row(
@@ -63,11 +65,11 @@ class _CourseCardState extends ConsumerState<CourseCard> {
                       const SizedBox(width: 10),
                       Text(
                         'by ',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: MyTypography.body,
                       ),
                       Text(
                         widget.course.instructor,
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: MyTypography.body,
                       ),
                     ],
                   ),
@@ -78,12 +80,11 @@ class _CourseCardState extends ConsumerState<CourseCard> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            buildLevelIndicatorStep(
-                                context, widget.course.level),
+                            LevelIndicator(level: widget.course.level),
                             const SizedBox(height: 10),
                             Text(
                               widget.course.level,
-                              style: Theme.of(context).textTheme.bodySmall,
+                              style: MyTypography.bodySmall,
                             ),
                           ],
                         ),
@@ -110,7 +111,7 @@ class _CourseCardState extends ConsumerState<CourseCard> {
                           children: [
                             Text(
                               'Preview',
-                              style: Theme.of(context).textTheme.bodyMedium,
+                              style: MyTypography.body,
                             ),
                             const SizedBox(width: 5),
                             Icon(
@@ -128,58 +129,6 @@ class _CourseCardState extends ConsumerState<CourseCard> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  buildLevelIndicatorStep(BuildContext context, String level) {
-    int step = 0;
-    switch (level) {
-      case 'Beginner':
-        step = 1;
-        break;
-      case 'Intermediate':
-        step = 2;
-        break;
-      case 'Advanced':
-        step = 3;
-        break;
-    }
-
-    return SizedBox(
-      height: 8,
-      child: ListView.separated(
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: 3,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          Color? color = MyColors.primary;
-          if (step < index + 1) {
-            color = Colors.grey[300];
-          }
-          return Container(
-            height: 8,
-            width: 8,
-            decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.circular(5),
-            ),
-          );
-        },
-        separatorBuilder: (context, index) {
-          Color? color = MyColors.primary;
-          if (step < index + 1 || step == index + 1) {
-            color = Colors.grey[300];
-          }
-
-          return UnconstrainedBox(
-            child: Container(
-              width: 5,
-              height: 2,
-              color: color,
-            ),
-          );
-        },
       ),
     );
   }

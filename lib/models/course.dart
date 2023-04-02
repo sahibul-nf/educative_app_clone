@@ -8,7 +8,7 @@ class Course {
   final String duration;
   final List<String> takeawaySkills;
   final String price;
-  final Map<String, List<String>> courseContent;
+  final List<CourseContent> courseContent;
 
   Course({
     required this.title,
@@ -41,26 +41,48 @@ final List<Course> courses = [
       'Learn how to use Flutter state management',
       'Learn how to use Flutter navigation',
     ],
-    price: 'Free',
-    courseContent: {
-      'Introduction': [
-        'What is Flutter?',
-        'Why Flutter?',
-        'Flutter vs React Native',
-        'Flutter vs Native',
-      ],
-      'Flutter Basics': [
-        'Flutter Setup',
-        'Flutter Widgets',
-        'Flutter State Management',
-        'Flutter Navigation',
-      ],
-      'Flutter Advanced': [
-        'Flutter Animations',
-        'Flutter Testing',
-        'Flutter Deployment',
-      ],
-    },
+    price: '\$0.00',
+    courseContent: [
+      CourseContent(
+        index: 1,
+        title: 'Introduction',
+        showDetail: false,
+        lessons: [
+          Lesson(
+            title: ' Install Flutter and Setup VSCode',
+            file: 'assets/lessons/install-flutter-and-setup-vscode.md',
+          ),
+          Lesson(
+            title: 'Why Flutter?',
+            file: 'assets/lessons/install-flutter-and-setup-vscode.md',
+          ),
+          Lesson(
+            title: 'Flutter vs React Native',
+            file: 'assets/lessons/install-flutter-and-setup-vscode.md',
+          ),
+        ],
+      ),
+      CourseContent(
+        index: 2,
+        title: 'Flutter Basics',
+        showDetail: false,
+        lessons: [
+          Lesson(title: 'Flutter Widgets', file: ''),
+          Lesson(title: 'Flutter State Management', file: ''),
+          Lesson(title: 'Flutter Navigation', file: ''),
+        ],
+      ),
+      CourseContent(
+        index: 3,
+        title: 'Flutter Advanced',
+        showDetail: false,
+        lessons: [
+          Lesson(title: 'Flutter Animations', file: ''),
+          Lesson(title: 'Flutter Testing', file: ''),
+          Lesson(title: 'Flutter Deployment', file: ''),
+        ],
+      ),
+    ],
   ),
   Course(
     title: 'Web Development',
@@ -78,25 +100,39 @@ final List<Course> courses = [
       'Learn how to use JavaScript',
       'Learn how to use React',
     ],
-    price: 'Free',
-    courseContent: {
-      'Introduction': [
-        'What is Web Development?',
-        'Why Web Development?',
-        'Web Development vs Mobile Development',
-      ],
-      'Web Development Basics': [
-        'HTML',
-        'CSS',
-        'JavaScript',
-        'React',
-      ],
-      'Web Development Advanced': [
-        'React Hooks',
-        'React Testing',
-        'React Deployment',
-      ],
-    },
+    price: '\$0.00',
+    courseContent: [
+      CourseContent(
+        index: 1,
+        title: 'Introduction',
+        showDetail: false,
+        lessons: [
+          Lesson(title: 'What is Web Development?', file: ''),
+          Lesson(title: 'Why Web Development?', file: ''),
+          Lesson(title: 'Web Development vs Mobile App Development', file: ''),
+        ],
+      ),
+      CourseContent(
+        index: 2,
+        title: 'Web Development Basics',
+        showDetail: false,
+        lessons: [
+          Lesson(title: 'HTML', file: ''),
+          Lesson(title: 'CSS', file: ''),
+          Lesson(title: 'JavaScript', file: ''),
+        ],
+      ),
+      CourseContent(
+        index: 3,
+        title: 'Web Development Advanced',
+        showDetail: false,
+        lessons: [
+          Lesson(title: 'React', file: ''),
+          Lesson(title: 'Angular', file: ''),
+          Lesson(title: 'Vue', file: ''),
+        ],
+      ),
+    ],
   ),
   Course(
     title: 'Mobile App Design',
@@ -114,23 +150,59 @@ final List<Course> courses = [
       'Learn how to use Figma',
       'Learn how to use Adobe XD',
     ],
-    price: 'Free',
-    courseContent: {
-      'Introduction': [
-        'What is Mobile App Design?',
-        'Why Mobile App Design?',
-        'Mobile App Design vs Web Design',
-      ],
-      'Mobile App Design Basics': [
-        'Sketch',
-        'Figma',
-        'Adobe XD',
-      ],
-      'Mobile App Design Advanced': [
-        'Designing for iOS',
-        'Designing for Android',
-        'Designing for Web',
-      ],
-    },
+    price: '\$0.00',
+    courseContent: [
+      CourseContent(
+        index: 1,
+        title: 'Introduction',
+        showDetail: false,
+        lessons: [
+          Lesson(title: 'What is Mobile App Design?', file: ''),
+          Lesson(title: 'Why Mobile App Design?', file: ''),
+          Lesson(title: 'Mobile App Design vs Web Design', file: ''),
+        ],
+      ),
+      CourseContent(
+        index: 2,
+        title: 'Mobile App Design Basics',
+        showDetail: false,
+        lessons: [
+          Lesson(title: 'Sketch', file: ''),
+          Lesson(title: 'Figma', file: ''),
+          Lesson(title: 'Adobe XD', file: ''),
+        ],
+      ),
+      CourseContent(
+        index: 3,
+        title: 'Mobile App Design Advanced',
+        showDetail: false,
+        lessons: [
+          Lesson(title: 'Prototyping', file: ''),
+          Lesson(title: 'Animation', file: ''),
+          Lesson(title: 'User Testing', file: ''),
+        ],
+      ),
+    ],
   ),
 ];
+
+class CourseContent {
+  final int index;
+  final String title;
+  final List<Lesson> lessons;
+  bool showDetail;
+
+  CourseContent({
+    required this.index,
+    required this.title,
+    required this.lessons,
+    required this.showDetail,
+  });
+}
+
+class Lesson {
+  final String title;
+  final String file;
+
+  Lesson({required this.title, required this.file});
+}

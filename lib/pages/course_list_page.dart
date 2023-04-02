@@ -1,4 +1,4 @@
-import 'package:educative_app_clone/colors.dart';
+import 'package:educative_app_clone/themes/colors.dart';
 import 'package:educative_app_clone/models/course.dart';
 import 'package:educative_app_clone/pages/course_detail_page.dart';
 import 'package:educative_app_clone/widgets/course_card.dart';
