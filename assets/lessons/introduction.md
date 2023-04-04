@@ -32,10 +32,10 @@ The architecture of the application will consist of three main components: the f
 
 Here is a diagram that illustrates the architecture of our application:
 
-<embed>https://miro.com/app/embed/uXjVMW94WRs=/?pres=1&frameId=3458764550725346283&embedId=177382621026</embed>
+![https://raw.githubusercontent.com/sahibul-nf/educative_app_clone/main/screenshots/architecture-schema.png](https://raw.githubusercontent.com/sahibul-nf/educative_app_clone/main/screenshots/architecture-schema.png "Architecture Schema")
 
 ## Database schema
 
 The database schema will consist of two tables: courses, and lessons. The course table will store information about each course, such as the course name, description, and price. The lessons table will store information about each lesson of a course, such as a lesson name, description, and content. These tables will be hosted on Supabase and accessed using the Flutter Supabase SDK to provide data to the front end of our application.
 
-<embed>https://drawsql.app/teams/sahibul-nf/diagrams/educative-io-schema/embed</embed>
+![https://raw.githubusercontent.com/sahibul-nf/educative_app_clone/main/screenshots/database-schema.png](https://raw.githubusercontent.com/sahibul-nf/educative_app_clone/main/screenshots/database-schema.png "Database Schema")
