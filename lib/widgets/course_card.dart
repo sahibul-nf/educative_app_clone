@@ -110,7 +110,7 @@ class _CourseCardState extends ConsumerState<CourseCard> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'Preview',
+                              'Get Started',
                               style: MyTypography.body,
                             ),
                             const SizedBox(width: 5),

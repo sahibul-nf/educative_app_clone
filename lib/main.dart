@@ -1,4 +1,4 @@
-import 'package:educative_app_clone/pages/course_list_page.dart';
+import 'package:educative_app_clone/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,11 +11,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProviderScope(
+    return const ProviderScope(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Educative',
-        home: CourseListPage(),
+        home: HomePage(),
       ),
     );
   }

@@ -1,13 +1,13 @@
-import 'package:educative_app_clone/themes/colors.dart';
 import 'package:educative_app_clone/models/course.dart';
 import 'package:educative_app_clone/pages/course_detail_page.dart';
+import 'package:educative_app_clone/themes/colors.dart';
 import 'package:educative_app_clone/widgets/course_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CourseListPage extends StatelessWidget {
-  const CourseListPage({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {

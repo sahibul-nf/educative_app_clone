@@ -2,8 +2,10 @@ import 'package:educative_app_clone/themes/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:markdown/markdown.dart' as md;
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomElementBuilder extends MarkdownElementBuilder {
   CustomElementBuilder(this.context);
@@ -12,8 +14,6 @@ class CustomElementBuilder extends MarkdownElementBuilder {
   @override
   Widget? visitElementAfter(md.Element element, TextStyle? preferredStyle) {
     String text = element.textContent;
-
-    if (element.tag == 'video') {}
 
     if (element.tag == 'code') {
       String language = '';
@@ -40,26 +40,45 @@ class CustomElementBuilder extends MarkdownElementBuilder {
       }
     }
 
+    // iframe
+    if (element.tag == 'embed') {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        child: HtmlWidget(
+          '<iframe src="$text"></iframe>',
+          customStylesBuilder: (element) {
+            if (element.classes.contains('name')) {
+              return {'color': 'red'};
+            }
+            return null;
+          },
+          onErrorBuilder: (context, element, error) =>
+              Text('$element error: $error'),
+          onLoadingBuilder: (context, element, loadingProgress) =>
+              const CircularProgressIndicator(),
+          onTapUrl: (url) => launchUrl(Uri.parse(url)),
+          renderMode: RenderMode.column,
+          buildAsync: true,
+          textStyle: const TextStyle(fontSize: 14),
+          enableCaching: true,
+        ),
+      );
+    }
+
     return null;
   }
 }
 
-List<md.InlineSyntax> customInlineSyntaxes = [
-  RedSyntax(),
-  OrangeSyntax(),
-  ModalSyntax(),
-  VideoSyntax(),
-];
-
 Map<String, MarkdownElementBuilder> markdownBuilders(BuildContext context) {
   return {
-    'red': CustomElementBuilder(context),
-    'orange': CustomElementBuilder(context),
-    'modal': CustomElementBuilder(context),
-    'video': CustomElementBuilder(context),
     'code': CustomElementBuilder(context),
+    'embed': CustomElementBuilder(context),
   };
 }
+
+List<md.InlineSyntax> markdownInlineSyntaxes = [
+  EmbedSyntax(),
+];
 
 MarkdownStyleSheet markdownStyleSheet(BuildContext context) {
   return MarkdownStyleSheet(
@@ -67,10 +86,6 @@ MarkdownStyleSheet markdownStyleSheet(BuildContext context) {
     a: MyTypography.body.copyWith(
       color: Colors.blue[700],
       decoration: TextDecoration.underline,
-    ),
-    listBullet: MyTypography.body.copyWith(
-      color: Colors.grey[700],
-      fontSize: 14,
     ),
     h1: MyTypography.title,
     h2: MyTypography.titleMedium,
@@ -89,49 +104,20 @@ MarkdownStyleSheet markdownStyleSheet(BuildContext context) {
       color: Colors.grey[200],
       borderRadius: BorderRadius.circular(5),
     ),
+    listBullet: MyTypography.body.copyWith(
+      color: Colors.grey[700],
+      fontSize: 14,
+    ),
     listIndent: 16,
   );
 }
 
-class RedSyntax extends md.InlineSyntax {
-  RedSyntax() : super(r'''<red>(.*)</red>''');
+class EmbedSyntax extends md.InlineSyntax {
+  EmbedSyntax() : super(r'''<embed>(.*)</embed>''');
 
   @override
   bool onMatch(md.InlineParser parser, Match match) {
-    final tag = md.Element.text('red', match[1]!.trim());
-    parser.addNode(tag);
-    return true;
-  }
-}
-
-class OrangeSyntax extends md.InlineSyntax {
-  OrangeSyntax() : super(r'''<orange>(.*)</orange>''');
-
-  @override
-  bool onMatch(md.InlineParser parser, Match match) {
-    final tag = md.Element.text('orange', match[1]!.trim());
-    parser.addNode(tag);
-    return true;
-  }
-}
-
-class ModalSyntax extends md.InlineSyntax {
-  ModalSyntax() : super(r'''<modal>(.*)</modal>''');
-
-  @override
-  bool onMatch(md.InlineParser parser, Match match) {
-    final tag = md.Element.text('modal', match[1]!.trim());
-    parser.addNode(tag);
-    return true;
-  }
-}
-
-class VideoSyntax extends md.InlineSyntax {
-  VideoSyntax() : super(r'''<video>(.*)</video>''');
-
-  @override
-  bool onMatch(md.InlineParser parser, Match match) {
-    final tag = md.Element.text('video', match[1]!.trim());
+    final tag = md.Element.text('embed', match[1]!.trim());
     parser.addNode(tag);
     return true;
   }

@@ -9,6 +9,7 @@ class Course {
   final List<String> takeawaySkills;
   final String price;
   final List<CourseContent> courseContent;
+  final List<Lesson> lessons;
 
   Course({
     required this.title,
@@ -20,15 +21,16 @@ class Course {
     required this.takeawaySkills,
     required this.price,
     required this.courseContent,
+    required this.lessons,
     required this.authorImageUrl,
   });
 }
 
 final List<Course> courses = [
   Course(
-    title: 'Flutter Development',
-    instructor: 'John Doe',
-    authorImageUrl: 'https://i.pravatar.cc/150?img=1',
+    title: 'Build educative.io clone with Flutter and Supabase',
+    instructor: 'Sahibul',
+    authorImageUrl: 'https://i.pravatar.cc/150?img',
     imageUrl:
         'https://www.educative.io/cdn-cgi/image/format=auto,width=950,quality=75/v2api/collection/10370001/6069685319630848/image/6492564120141824',
     description:
@@ -37,9 +39,9 @@ final List<Course> courses = [
     duration: '9 hours',
     takeawaySkills: [
       'Build beautiful and responsive mobile apps',
-      'Learn how to use Flutter widgets',
-      'Learn how to use Flutter state management',
-      'Learn how to use Flutter navigation',
+      'Learn how to use Flutter',
+      'Learn how to use Dart',
+      'Learn how to use Supabase',
     ],
     price: '\$0.00',
     courseContent: [
@@ -49,32 +51,35 @@ final List<Course> courses = [
         showDetail: false,
         lessons: [
           Lesson(
-            title: ' Install Flutter and Setup VSCode',
+            title: 'Overview',
             file: 'assets/lessons/install-flutter-and-setup-vscode.md',
           ),
           Lesson(
-            title: 'Why Flutter?',
-            file: 'assets/lessons/install-flutter-and-setup-vscode.md',
+            title: 'Introduction',
+            file: 'assets/lessons/introduction.md',
           ),
           Lesson(
-            title: 'Flutter vs React Native',
+            title: 'Build the UI',
             file: 'assets/lessons/install-flutter-and-setup-vscode.md',
           ),
         ],
       ),
       CourseContent(
         index: 2,
-        title: 'Flutter Basics',
+        title: 'Setting up the project',
         showDetail: false,
         lessons: [
-          Lesson(title: 'Flutter Widgets', file: ''),
+          Lesson(
+            title: 'Install Flutter and Setup VSCode',
+            file: 'assets/lessons/install-flutter-and-setup-vscode.md',
+          ),
           Lesson(title: 'Flutter State Management', file: ''),
           Lesson(title: 'Flutter Navigation', file: ''),
         ],
       ),
       CourseContent(
         index: 3,
-        title: 'Flutter Advanced',
+        title: 'Building the UI',
         showDetail: false,
         lessons: [
           Lesson(title: 'Flutter Animations', file: ''),
@@ -82,6 +87,38 @@ final List<Course> courses = [
           Lesson(title: 'Flutter Deployment', file: ''),
         ],
       ),
+      CourseContent(
+        index: 4,
+        title: 'Implementing the functionality',
+        showDetail: false,
+        lessons: [
+          Lesson(title: 'Flutter Animations', file: ''),
+          Lesson(title: 'Flutter Testing', file: ''),
+          Lesson(title: 'Flutter Deployment', file: ''),
+        ],
+      ),
+      CourseContent(
+        index: 5,
+        title: 'Conclusion',
+        showDetail: false,
+        lessons: [
+          Lesson(title: 'Flutter Animations', file: ''),
+          Lesson(title: 'Flutter Testing', file: ''),
+          Lesson(title: 'Flutter Deployment', file: ''),
+        ],
+      ),
+    ],
+    lessons: [
+      Lesson(
+          title: 'Overview',
+          file: 'assets/lessons/introduction.md'),
+      Lesson(
+          title: 'Install Flutter and Setup VSCode',
+          file: 'assets/lessons/install-flutter-and-setup-vscode.md'),
+      Lesson(title: 'Flutter Navigation', file: ''),
+      Lesson(title: 'Flutter Animations', file: ''),
+      Lesson(title: 'Flutter Testing', file: ''),
+      Lesson(title: 'Flutter Deployment', file: ''),
     ],
   ),
   Course(
@@ -133,6 +170,17 @@ final List<Course> courses = [
         ],
       ),
     ],
+    lessons: [
+      Lesson(title: 'What is Web Development?', file: ''),
+      Lesson(title: 'Why Web Development?', file: ''),
+      Lesson(title: 'Web Development vs Mobile App Development', file: ''),
+      Lesson(title: 'HTML', file: ''),
+      Lesson(title: 'CSS', file: ''),
+      Lesson(title: 'JavaScript', file: ''),
+      Lesson(title: 'React', file: ''),
+      Lesson(title: 'Angular', file: ''),
+      Lesson(title: 'Vue', file: ''),
+    ],
   ),
   Course(
     title: 'Mobile App Design',
@@ -182,6 +230,17 @@ final List<Course> courses = [
           Lesson(title: 'User Testing', file: ''),
         ],
       ),
+    ],
+    lessons: [
+      Lesson(title: 'What is Mobile App Design?', file: ''),
+      Lesson(title: 'Why Mobile App Design?', file: ''),
+      Lesson(title: 'Mobile App Design vs Web Design', file: ''),
+      Lesson(title: 'Sketch', file: ''),
+      Lesson(title: 'Figma', file: ''),
+      Lesson(title: 'Adobe XD', file: ''),
+      Lesson(title: 'Prototyping', file: ''),
+      Lesson(title: 'Animation', file: ''),
+      Lesson(title: 'User Testing', file: ''),
     ],
   ),
 ];
