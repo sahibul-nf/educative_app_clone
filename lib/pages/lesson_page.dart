@@ -121,43 +121,42 @@ class _LessonPageState extends ConsumerState<LessonPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              OutlinedButton(
-                                onPressed: () {},
-                                onHover: (value) {},
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: MyColors.primary,
-                                  side: const BorderSide(
-                                    color: Colors.grey,
-                                    width: 1,
+                              if (index == 0) const Spacer(),
+                              if (index != 0)
+                                OutlinedButton(
+                                  onPressed: () {
+                                    previousPage();
+                                  },
+                                  onHover: (value) {},
+                                  style: OutlinedButton.styleFrom(
+                                    foregroundColor: MyColors.primary,
+                                    side: const BorderSide(
+                                      color: Colors.grey,
+                                      width: 1,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
                                   ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        Icons.arrow_back_rounded,
+                                        size: 20,
+                                        color: MyColors.black,
+                                      ),
+                                      const SizedBox(width: 5),
+                                      Text(
+                                        'Back',
+                                        style: MyTypography.body,
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(
-                                      Icons.arrow_back_rounded,
-                                      size: 20,
-                                      color: MyColors.black,
-                                    ),
-                                    const SizedBox(width: 5),
-                                    Text(
-                                      'Back',
-                                      style: MyTypography.body,
-                                    ),
-                                  ],
-                                ),
-                              ),
                               OutlinedButton(
                                 onPressed: () {
-                                  if (index ==
-                                      widget.course.lessons.length - 1) {
-                                    // go to course page
-                                  } else {
-                                    nextPage();
-                                  }
+                                  nextPage();
                                 },
                                 onHover: (value) {},
                                 style: OutlinedButton.styleFrom(
