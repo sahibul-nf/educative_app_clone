@@ -58,7 +58,7 @@ In the search bar, type "Dart" and click on the "Install" button next to the "Da
 
 To create a new Flutter project, open the command palette in VS Code by pressing `Ctrl+Shift+P` (Windows, Linux) or `Cmd+Shift+P` (macOS). In the search bar, type "Flutter" and select "Flutter: New Project". Follow the prompts to give your project a name and select a directory to save it in.
 
-<embed>https://www.loom.com/share/d45c3a3ffcb64a4aa12a876877ca3a0b</embed>
+<embed>https://www.loom.com/embed/d45c3a3ffcb64a4aa12a876877ca3a0b</embed>
 
 ### Running the project on an emulator or device
 
