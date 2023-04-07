@@ -1,16 +1,5 @@
 # Installing Flutter and Setting up Environment for Coding using VS Code
 
-## Overview
-
-Flutter is a mobile app SDK for building high-performance, high-fidelity, apps for iOS and Android, from a single codebase. With Flutter, you can easily build beautiful, fast and native mobile apps using the Dart programming language.
-
-Some advantages of using Flutter include:
-
-- Hot reload for fast development cycles
-- A rich set of pre-built and customizable widgets
-- Access to native features and APIs
-- High performance and fast rendering
-
 This guide will walk you through the process of installing Flutter and setting up your environment for coding using Visual Studio Code.
 
 ## Installing Flutter
@@ -69,7 +58,7 @@ In the search bar, type "Dart" and click on the "Install" button next to the "Da
 
 To create a new Flutter project, open the command palette in VS Code by pressing `Ctrl+Shift+P` (Windows, Linux) or `Cmd+Shift+P` (macOS). In the search bar, type "Flutter" and select "Flutter: New Project". Follow the prompts to give your project a name and select a directory to save it in.
 
-![https://www.loom.com/share/d45c3a3ffcb64a4aa12a876877ca3a0b](https://cdn.loom.com/sessions/thumbnails/d45c3a3ffcb64a4aa12a876877ca3a0b-with-play.gif "Create a new Flutter project")
+<embed>https://www.loom.com/share/d45c3a3ffcb64a4aa12a876877ca3a0b</embed>
 
 ### Running the project on an emulator or device
 

@@ -38,4 +38,4 @@ Here is a diagram that illustrates the architecture of our application:
 
 The database schema will consist of two tables: courses, and lessons. The course table will store information about each course, such as the course name, description, and price. The lessons table will store information about each lesson of a course, such as a lesson name, description, and content. These tables will be hosted on Supabase and accessed using the Flutter Supabase SDK to provide data to the front end of our application.
 
-![https://raw.githubusercontent.com/sahibul-nf/educative_app_clone/main/screenshots/database-schema.png](https://raw.githubusercontent.com/sahibul-nf/educative_app_clone/main/screenshots/database-schema.png "Database Schema")
+![https://raw.githubusercontent.com/sahibul-nf/educative_app_clone/main/screenshots/supbase-schema.png](https://raw.githubusercontent.com/sahibul-nf/educative_app_clone/main/screenshots/supbase-schema.png "Database Schema")
