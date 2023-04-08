@@ -322,16 +322,19 @@ class _CourseDetailPageState extends ConsumerState<CourseDetailPage> {
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        height: 16,
-                        width: 16,
-                        margin: const EdgeInsets.only(top: 1),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(),
+                      if (lesson.lessons[index].isCompleted == true)
+                        const Icon(
+                          Icons.check_circle,
+                          size: 20,
+                          color: Colors.green,
+                        )
+                      else
+                        Icon(
+                          Icons.radio_button_unchecked,
+                          size: 20,
+                          color: MyColors.black,
                         ),
-                      ),
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 20),
                       Expanded(
                         child: Text(
                           lesson.lessons[index].title,
