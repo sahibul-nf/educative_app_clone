@@ -57,7 +57,7 @@ class _CourseCardState extends ConsumerState<CourseCard> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
-                          widget.course.authorImageUrl,
+                          widget.course.authorAvatarUrl,
                           height: 30,
                           width: 30,
                         ),
@@ -68,7 +68,7 @@ class _CourseCardState extends ConsumerState<CourseCard> {
                         style: MyTypography.body,
                       ),
                       Text(
-                        widget.course.instructor,
+                        widget.course.authorName,
                         style: MyTypography.body,
                       ),
                     ],
