@@ -2,6 +2,7 @@ import 'package:educative_app_clone/controllers/course_controller.dart';
 import 'package:educative_app_clone/pages/course_detail_page.dart';
 import 'package:educative_app_clone/themes/colors.dart';
 import 'package:educative_app_clone/widgets/course_card.dart';
+import 'package:educative_app_clone/widgets/course_list_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -79,9 +80,7 @@ class HomePage extends ConsumerWidget {
             },
           );
         },
-        loading: () => const Center(
-          child: CircularProgressIndicator(),
-        ),
+        loading: () => CourseListLoading(),
         error: (error, stack) => Center(
           child: Text(error.toString()),
         ),

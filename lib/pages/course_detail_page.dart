@@ -7,6 +7,7 @@ import 'package:educative_app_clone/themes/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readmore/readmore.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CourseDetailPage extends ConsumerStatefulWidget {
   final Course course;
@@ -345,8 +346,17 @@ class _CourseDetailPageState extends ConsumerState<CourseDetailPage> {
           }).toList(),
         );
       },
-      loading: () => const Center(
-        child: CircularProgressIndicator(),
+      loading: () => Shimmer.fromColors(
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!,
+        child: Container(
+          height: 30,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
       ),
       error: (error, stackTrace) => const Center(
         child: Text('Error'),

@@ -1,12 +1,15 @@
 import 'package:educative_app_clone/controllers/lesson_controller.dart';
 import 'package:educative_app_clone/models/course.dart';
+import 'package:educative_app_clone/pages/course_finish_page.dart';
 import 'package:educative_app_clone/themes/colors.dart';
 import 'package:educative_app_clone/themes/typography.dart';
+import 'package:educative_app_clone/widgets/lesson_loading.dart';
 import 'package:educative_app_clone/widgets/markdown_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LessonPage extends ConsumerStatefulWidget {
@@ -18,7 +21,7 @@ class LessonPage extends ConsumerStatefulWidget {
 }
 
 class _LessonPageState extends ConsumerState<LessonPage> {
-  final PageController _pageController = PageController();
+  late PageController _pageController;
 
   void nextPage() {
     _pageController.nextPage(
@@ -37,7 +40,16 @@ class _LessonPageState extends ConsumerState<LessonPage> {
   @override
   void initState() {
     super.initState();
+    _pageController = PageController();
   }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  int currentPage = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +70,38 @@ class _LessonPageState extends ConsumerState<LessonPage> {
                 overflow: TextOverflow.ellipsis,
               ),
               actions: [
-                IconButton(
-                  padding: const EdgeInsets.only(right: 10),
-                  icon: const Icon(Icons.search),
-                  color: Colors.grey,
-                  onPressed: () {},
+                allLessonState.when(
+                  data: (lessons) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Center(
+                        child: Text(
+                          '$currentPage / ${lessons.length}',
+                          style: MyTypography.bodySmall,
+                        ),
+                      ),
+                    );
+                  },
+                  loading: () {
+                    return UnconstrainedBox(
+                      child: Shimmer.fromColors(
+                        baseColor: Colors.grey[300]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(
+                          width: 50,
+                          height: 20,
+                          margin: const EdgeInsets.symmetric(horizontal: 16),
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  error: (error, stack) {
+                    return const SizedBox();
+                  },
                 ),
               ],
             ),
@@ -74,7 +113,9 @@ class _LessonPageState extends ConsumerState<LessonPage> {
               controller: _pageController,
               itemCount: lessons.length,
               onPageChanged: (value) {
-                print(value);
+                setState(() {
+                  currentPage = value + 1;
+                });
               },
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
@@ -86,6 +127,7 @@ class _LessonPageState extends ConsumerState<LessonPage> {
 
                     if (snapshot.hasData) {
                       return SingleChildScrollView(
+                        controller: ScrollController(),
                         padding: const EdgeInsets.only(
                           bottom: 40,
                           left: 20,
@@ -128,7 +170,6 @@ class _LessonPageState extends ConsumerState<LessonPage> {
                                 launchUrl(Uri.parse(href!));
                               },
                             ),
-                            // continue button
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 40),
                               child: Column(
@@ -196,7 +237,17 @@ class _LessonPageState extends ConsumerState<LessonPage> {
                                         children: [
                                           OutlinedButton(
                                             onPressed: () {
-                                              nextPage();
+                                              if (isLastPage) {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const CourseFinishPage(),
+                                                  ),
+                                                );
+                                              } else {
+                                                nextPage();
+                                              }
                                             },
                                             onHover: (value) {},
                                             style: OutlinedButton.styleFrom(
@@ -282,17 +333,13 @@ class _LessonPageState extends ConsumerState<LessonPage> {
                       );
                     }
 
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return const LessonLoading();
                   },
                 );
               },
             );
           },
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
+          loading: () => const LessonLoading(),
           error: (error, stack) => Center(
             child: Text(error.toString()),
           ),
