@@ -6,8 +6,7 @@ Supabase is a popular open-source alternative to Firebase, which provides a suit
 
 To get started with Supabase, you will need to sign up for a free account on their website. This process is very straightforward. Simply navigate to the Supabase homepage and click on the "**Start your project**" button. From there, follow the prompts to create an account and set up your profile.
 
-[The Open Source Firebase Alternative | Supabase](https://supabase.com/)
-<embed>https://supabase.com/</embed>
+<link>https://supabase.com/</link>
 
 ## Step 2: Create a new project
 
