@@ -119,9 +119,15 @@ class _LessonPageState extends ConsumerState<LessonPage> {
               },
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
+                final lesson = [
+                  'assets/lessons/setting-up-supabase.md',
+                  'assets/lessons/introduction.md',
+                  'assets/lessons/install-flutter-and-setup-vscode.md'
+                ];
                 return FutureBuilder(
-                  future: NetworkAssetBundle(Uri.parse(lessons[index].content))
-                      .loadString(''),
+                  // future: NetworkAssetBundle(Uri.parse(lessons[index].content))
+                  //     .loadString(''),
+                  future: rootBundle.loadString(lesson[index]),
                   builder: (context, snapshot) {
                     bool isLastPage = index == lessons.length - 1;
 

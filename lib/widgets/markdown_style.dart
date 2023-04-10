@@ -1,3 +1,4 @@
+import 'package:any_link_preview/any_link_preview.dart';
 import 'package:educative_app_clone/themes/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -42,25 +43,58 @@ class CustomElementBuilder extends MarkdownElementBuilder {
 
     // iframe
     if (element.tag == 'embed') {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: HtmlWidget(
-          '<iframe src="$text"></iframe>',
-          customStylesBuilder: (element) {
-            if (element.classes.contains('name')) {
-              return {'color': 'red'};
-            }
-            return null;
-          },
-          onErrorBuilder: (context, element, error) =>
-              Text('$element error: $error'),
-          onLoadingBuilder: (context, element, loadingProgress) =>
-              const CircularProgressIndicator(),
-          onTapUrl: (url) => launchUrl(Uri.parse(url)),
-          renderMode: RenderMode.column,
-          buildAsync: true,
-          textStyle: const TextStyle(fontSize: 14),
-          enableCaching: true,
+      return Padding(
+        padding: const EdgeInsets.only(top: 5, bottom: 10),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: HtmlWidget(
+            '<iframe src="$text"></iframe>',
+            customStylesBuilder: (element) {
+              if (element.classes.contains('name')) {
+                return {'color': 'red'};
+              }
+              return null;
+            },
+            onErrorBuilder: (context, element, error) =>
+                Text('$element error: $error'),
+            onLoadingBuilder: (context, element, loadingProgress) =>
+                const CircularProgressIndicator(),
+            onTapUrl: (url) => launchUrl(Uri.parse(url)),
+            renderMode: RenderMode.column,
+            buildAsync: true,
+            textStyle: const TextStyle(fontSize: 14),
+            enableCaching: true,
+          ),
+        ),
+      );
+    }
+
+    // link
+    if (element.tag == 'link-preview') {
+      return Padding(
+        padding: const EdgeInsets.only(top: 5, bottom: 10),
+        child: AnyLinkPreview(
+          link: text,
+          borderRadius: 10,
+          errorBody: 'Oops! Something went wrong.',
+          errorTitle: 'Error',
+          removeElevation: true,
+          titleStyle: MyTypography.body,
+          bodyStyle: MyTypography.bodySmall.copyWith(
+            color: Colors.grey,
+          ),
+          cache: const Duration(days: 1),
+          backgroundColor: Colors.white,
+          placeholderWidget: Container(
+            height: 100,
+            width: 100,
+            color: Colors.grey[200],
+          ),
+          errorWidget: Container(
+            height: 100,
+            width: 100,
+            color: Colors.grey[200],
+          ),
         ),
       );
     }
@@ -73,11 +107,13 @@ Map<String, MarkdownElementBuilder> markdownBuilders(BuildContext context) {
   return {
     'code': CustomElementBuilder(context),
     'embed': CustomElementBuilder(context),
+    'link-preview': CustomElementBuilder(context),
   };
 }
 
 List<md.InlineSyntax> markdownInlineSyntaxes = [
   EmbedSyntax(),
+  LinksPreview(),
 ];
 
 MarkdownStyleSheet markdownStyleSheet(BuildContext context) {
@@ -118,6 +154,17 @@ class EmbedSyntax extends md.InlineSyntax {
   @override
   bool onMatch(md.InlineParser parser, Match match) {
     final tag = md.Element.text('embed', match[1]!.trim());
+    parser.addNode(tag);
+    return true;
+  }
+}
+
+class LinksPreview extends md.InlineSyntax {
+  LinksPreview() : super(r'''<link-preview>(.*)</link-preview>''');
+
+  @override
+  bool onMatch(md.InlineParser parser, Match match) {
+    final tag = md.Element.text('link-preview', match[1]!.trim());
     parser.addNode(tag);
     return true;
   }
