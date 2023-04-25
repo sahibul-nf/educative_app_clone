@@ -24,6 +24,7 @@ class _CourseDetailPageState extends ConsumerState<CourseDetailPage> {
   @override
   Widget build(BuildContext context) {
     final lessonState = ref.watch(lessonProvider(widget.course.id));
+    final lessonChildState = ref.watch(lessonChildProvider(widget.course.id));
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -119,10 +120,10 @@ class _CourseDetailPageState extends ConsumerState<CourseDetailPage> {
                               ),
                             ),
                           ),
-                          lessonState.when(
+                          lessonChildState.when(
                             data: (lessons) => buildLessonDuration(
                               Icons.library_books_outlined,
-                              "${lessons.length.toString()} Lessons",
+                              "${lessons.length} Lessons",
                             ),
                             loading: () => const SizedBox.shrink(),
                             error: (error, stack) => const SizedBox.shrink(),
