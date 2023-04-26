@@ -23,6 +23,15 @@ final lessonChildProvider =
   },
 );
 
+final completeLessonChildProvider =
+    FutureProvider.autoDispose.family<void, LessonChild>(
+  (ref, lessonChild) async {
+    final lessonController = LessonController();
+    await lessonController.completeLessonChild(lessonChild.id,
+        isComplete: lessonChild.isCompleted!);
+  },
+);
+
 class LessonController {
   final supabase = Supabase.instance.client;
 
@@ -49,7 +58,8 @@ class LessonController {
     final response = await supabase
         .from('lesson')
         .select('*, lesson_child!inner(*)')
-        .eq('course_id', courseId);
+        .eq('course_id', courseId)
+        .order('created_at', ascending: true);
 
     // debugPrint("response: $response");
 
@@ -67,5 +77,15 @@ class LessonController {
     debugPrint("lessonChild: ${lessonChilds.length}");
 
     return lessonChilds;
+  }
+
+  // complete lesson child
+  Future<void> completeLessonChild(String lessonChildId,
+      {required bool isComplete}) async {
+    final response = await supabase
+        .from('lesson_child')
+        .update({'is_completed': isComplete}).eq('id', lessonChildId);
+
+    debugPrint("response: $response");
   }
 }

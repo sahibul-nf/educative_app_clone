@@ -25,7 +25,7 @@ class CourseFinishPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Text(
-                'You have completed the course successfully. You can now go back to the home page.',
+                'You have completed the course successfully. Now you can continue to the next course.',
                 style: MyTypography.body,
                 textAlign: TextAlign.center,
               ),

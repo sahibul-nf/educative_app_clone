@@ -18,6 +18,7 @@ class HomePage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             SvgPicture.asset(
@@ -80,7 +81,7 @@ class HomePage extends ConsumerWidget {
             },
           );
         },
-        loading: () => CourseListLoading(),
+        loading: () => const CourseListLoading(),
         error: (error, stack) => Center(
           child: Text(error.toString()),
         ),

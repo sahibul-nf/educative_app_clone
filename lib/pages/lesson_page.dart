@@ -1,5 +1,6 @@
 import 'package:educative_app_clone/controllers/lesson_controller.dart';
 import 'package:educative_app_clone/models/course.dart';
+import 'package:educative_app_clone/models/lesson.dart';
 import 'package:educative_app_clone/pages/course_finish_page.dart';
 import 'package:educative_app_clone/themes/colors.dart';
 import 'package:educative_app_clone/themes/typography.dart';
@@ -109,6 +110,9 @@ class _LessonPageState extends ConsumerState<LessonPage> {
         },
         body: allLessonState.when(
           data: (lessons) {
+            final isCompletedAll =
+                lessons.every((lesson) => lesson.isCompleted == true);
+
             return PageView.builder(
               controller: _pageController,
               itemCount: lessons.length,
@@ -244,13 +248,7 @@ class _LessonPageState extends ConsumerState<LessonPage> {
                                           OutlinedButton(
                                             onPressed: () {
                                               if (isLastPage) {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const CourseFinishPage(),
-                                                  ),
-                                                );
+                                                finishLesson(isCompletedAll);
                                               } else {
                                                 nextPage();
                                               }
@@ -310,11 +308,10 @@ class _LessonPageState extends ConsumerState<LessonPage> {
                                   ),
                                   const SizedBox(height: 20),
                                   CheckboxListTile(
-                                    onChanged: (v) {
-                                      setState(() {
-                                        lessons[index].isCompleted = v;
-                                      });
-                                    },
+                                    onChanged: (v) => markAsComplete(
+                                      lessons[index],
+                                      v,
+                                    ),
                                     value: lessons[index].isCompleted,
                                     tileColor: Colors.grey[100],
                                     activeColor:
@@ -352,5 +349,85 @@ class _LessonPageState extends ConsumerState<LessonPage> {
         ),
       ),
     );
+  }
+
+  void markAsComplete(LessonChild lesson, bool? v) {
+    setState(() {
+      lesson.isCompleted = v;
+    });
+
+    ref
+        .read(completeLessonChildProvider(lesson).future)
+        .onError((error, stackTrace) {
+      setState(() {
+        lesson.isCompleted = false;
+      });
+    });
+  }
+
+  void finishLesson(bool isCompletedAll) {
+    if (isCompletedAll) {
+      // showDialog to confirm finish lesson
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text(
+              'Are you sure?',
+            ),
+            content: const Text(
+              'You have completed all the lessons. Are you sure you want to finish this course?',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'Cancel',
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CourseFinishPage(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'Finish',
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text(
+              'Oops!',
+            ),
+            content: const Text(
+              'You have not completed all the lessons yet. Please complete all the lessons first.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'OK',
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 }

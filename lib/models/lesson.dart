@@ -33,6 +33,7 @@ class LessonChild {
   final String content;
   bool? isCompleted;
   final String lessonId;
+  final DateTime? createdAt;
 
   LessonChild({
     required this.id,
@@ -40,6 +41,7 @@ class LessonChild {
     required this.content,
     required this.isCompleted,
     required this.lessonId,
+    this.createdAt,
   });
 
   factory LessonChild.fromJson(Map<String, dynamic> json) {
@@ -49,6 +51,7 @@ class LessonChild {
       content: json['content'],
       isCompleted: json['is_completed'] ?? false,
       lessonId: json['lesson_parent_id'],
+      createdAt: DateTime.tryParse(json['created_at']),
     );
   }
 }
