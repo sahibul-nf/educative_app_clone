@@ -10,7 +10,7 @@ Let's get started!
 
 Since we are using Riverpod as the state management for this project, we need to install the **[Flutter Riverpod Snippets](https://marketplace.visualstudio.com/items?itemName=robert-brunhage.flutter-riverpod-snippets)** extension in VS Code to facilitate the development process using Riverpod state management. You can follow the video below for the installation process!
 
-[https://www.loom.com/share/44bff4693cf043c698366e08c141a8d3](https://www.loom.com/share/44bff4693cf043c698366e08c141a8d3)
+<embed>https://www.loom.com/embed/44bff4693cf043c698366e08c141a8d3</embed>
 
 ## Step-by-step guide
 
@@ -688,7 +688,7 @@ class HomePage extends StatelessWidget {
 
 Let's test our app. Run the application on an emulator or actual device using the command in a terminal. The command `flutter run` will build the app and install it on your device.
 
-[https://www.loom.com/share/84578aefaf0d46969f15c58a6ec172fa](https://www.loom.com/share/84578aefaf0d46969f15c58a6ec172fa)
+<embed>https://www.loom.com/embed/84578aefaf0d46969f15c58a6ec172fa</embed>
 
 ## Conclusion
 
