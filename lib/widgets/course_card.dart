@@ -19,8 +19,6 @@ class CourseCard extends ConsumerStatefulWidget {
 }
 
 class _CourseCardState extends ConsumerState<CourseCard> {
-  bool onHover = false;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -91,15 +89,10 @@ class _CourseCardState extends ConsumerState<CourseCard> {
                       ),
                       OutlinedButton(
                         onPressed: widget.onPressed,
-                        onHover: (value) {
-                          setState(() {
-                            onHover = value;
-                          });
-                        },
                         style: OutlinedButton.styleFrom(
                           foregroundColor: MyColors.primary,
-                          side: BorderSide(
-                            color: onHover ? MyColors.black : Colors.grey,
+                          side: const BorderSide(
+                            color: Colors.grey,
                             width: 1,
                           ),
                           shape: RoundedRectangleBorder(
