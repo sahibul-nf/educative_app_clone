@@ -2,13 +2,15 @@
 
 ## Introduction
 
-The home page is the first thing users see when they visit an app. Therefore, it is essential to make a good first impression and provide a clear indication of what the app is all about. This section will guide you through creating the home page for the [educative.io](http://educative.io/) clone with Flutter. Let's get started!
+The home page is the first thing users see when they visit an app. Therefore, it is essential to make a good first impression and provide a clear indication of what the app is all about. This section will guide you through creating the home page for the [educative.io](http://educative.io/) clone with Flutter. 
+
+Let's get started!
 
 ## Let’s Get Started
 
 Since we are using Riverpod as the state management for this project, we need to install the **[Flutter Riverpod Snippets](https://marketplace.visualstudio.com/items?itemName=robert-brunhage.flutter-riverpod-snippets)** extension in VS Code to facilitate the development process using Riverpod state management. You can follow the video below for the installation process!
 
-<embed>https://www.loom.com/embed/44bff4693cf043c698366e08c141a8d3</embed>
+[https://www.loom.com/share/44bff4693cf043c698366e08c141a8d3](https://www.loom.com/share/44bff4693cf043c698366e08c141a8d3)
 
 ## Step-by-step guide
 
@@ -471,12 +473,12 @@ import '../models/course.dart';
 final List<Course> courses = [
   Course(
     id: 'c1',
-    title: 'Introduction to Python Programming',
+    title: 'Build educative.io clone with Flutter and Supabase',
     authorName: 'John Doe',
-    authorAvatarUrl: '<https://via.placeholder.com/150>',
+    authorAvatarUrl: 'https://i.pravatar.cc/150?img',
     authorJob: 'Senior Software Engineer',
-    imageUrl: '<https://via.placeholder.com/350x200>',
-    description: 'Learn the basics of Python programming language.',
+    imageUrl: 'https://www.educative.io/cdn-cgi/image/format=auto,width=950,quality=75/v2api/collection/10370001/6069685319630848/image/6492564120141824',
+    description: 'Learn how to build educative.io clone with Flutter and Supabase.',
     level: 'Beginner',
     duration: '2 weeks',
     price: 'Free',
@@ -486,10 +488,12 @@ final List<Course> courses = [
     id: 'c2',
     title: 'Django Web Development',
     authorName: 'Jane Smith',
-    authorAvatarUrl: '<https://via.placeholder.com/150>',
+    authorAvatarUrl: 'https://i.pravatar.cc/150?img',
     authorJob: 'Software Engineer',
-    imageUrl: '<https://via.placeholder.com/350x200>',
-    description: 'Learn how to build web applications using Django.',
+    imageUrl:
+        'https://www.educative.io/v2api/collection/10370001/5551624074297344/image/5668113229021184',
+    description:
+        'Learn how to build modern and responsive websites using HTML, CSS, and JavaScript, and popular web development frameworks like React and Angular.',
     level: 'Intermediate',
     duration: '4 weeks',
     price: 'Paid',
@@ -499,10 +503,12 @@ final List<Course> courses = [
     id: 'c3',
     title: 'Machine Learning with Python',
     authorName: 'Bob Johnson',
-    authorAvatarUrl: '<https://via.placeholder.com/150>',
+    authorAvatarUrl: 'https://i.pravatar.cc/150?img',
     authorJob: 'Data Scientist',
-    imageUrl: '<https://via.placeholder.com/350x200>',
-    description: 'Learn how to build machine learning models using Python.',
+    imageUrl:
+        'https://www.educative.io/v2api/collection/10370001/6205771374133248/image/4589857022672896',
+    description:
+        'Learn how to design beautiful and user-friendly mobile apps using Sketch, Figma, and other popular design tools.',
     level: 'Advanced',
     duration: '6 weeks',
     price: 'Paid',
@@ -551,6 +557,54 @@ class HomePage extends StatelessWidget {
 ```
 
 In this updated code, we imported the `Course` class and the `courses` list from their respective files. We then used the `courses` list as the data source for the `ListView.separated` widget. For each course in the `courses` list, we created a `CourseCard` widget and passed the course object to it.
+
+### Step 8 - Apply HomePage widget on main.dart
+
+Finally, apply the `HomePage` widget on `main.dart`, we need to set the `HomePage` widget as the value of the `home` property in the `MaterialApp` widget.
+
+Here's the updated code for the `main.dart` file:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'pages/home_page.dart';
+
+void main() async {
+  await dotenv.load(fileName: ".env");
+
+  final supabaseUrl = dotenv.get('SUPABASE_URL');
+  final supabaseAnonKey = dotenv.get('SUPABASE_ANON_KEY');
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: supabaseUrl,
+    anonKey: supabaseAnonKey,
+  );
+
+	runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const ProviderScope(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Educative',
+        home: HomePage(),
+      ),
+    );
+  }
+}
+```
+
+In this updated code, we set the `HomePage` widget as the value of the `home` property in the `MaterialApp` widget. When we run the app, the `HomePage` widget will be displayed first.
 
 ### Full home_page.dart file
 
@@ -629,6 +683,12 @@ class HomePage extends StatelessWidget {
 }
 
 ```
+
+### Testing the App
+
+Let's test our app. Run the application on an emulator or actual device using the command in a terminal. The command `flutter run` will build the app and install it on your device.
+
+[https://www.loom.com/share/84578aefaf0d46969f15c58a6ec172fa](https://www.loom.com/share/84578aefaf0d46969f15c58a6ec172fa)
 
 ## Conclusion
 
