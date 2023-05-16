@@ -1,24 +1,25 @@
-import 'package:educative_app_clone/controllers/lesson_controller.dart';
-import 'package:educative_app_clone/models/course.dart';
-import 'package:educative_app_clone/models/lesson.dart';
-import 'package:educative_app_clone/pages/lesson_page.dart';
-import 'package:educative_app_clone/themes/colors.dart';
-import 'package:educative_app_clone/themes/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readmore/readmore.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../controllers/lesson_controller.dart';
+import '../models/course.dart';
+import '../models/lesson.dart';
+import '../themes/colors.dart';
+import '../themes/typography.dart';
+import 'lesson_page.dart';
+
 class CourseDetailPage extends ConsumerStatefulWidget {
+  const CourseDetailPage({super.key, required this.course});
   final Course course;
 
-  const CourseDetailPage({super.key, required this.course});
-
   @override
-  ConsumerState<CourseDetailPage> createState() => _CourseDetailPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _NewCourseDetailPageState();
 }
 
-class _CourseDetailPageState extends ConsumerState<CourseDetailPage> {
+class _NewCourseDetailPageState extends ConsumerState<CourseDetailPage> {
   bool isExpand = false;
 
   @override
@@ -27,177 +28,213 @@ class _CourseDetailPageState extends ConsumerState<CourseDetailPage> {
     final lessonChildState = ref.watch(lessonChildProvider(widget.course.id));
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Stack(
-              children: [
-                Stack(
-                  children: [
-                    Opacity(
-                      opacity: 0.5,
-                      child: Image.network(
-                        widget.course.imageUrl,
-                        height: MediaQuery.of(context).size.height * 0.4,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.4,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.8),
-                        gradient: const LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.transparent,
-                            Colors.black,
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Positioned(
-                  top: 40,
-                  left: 10,
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_back),
-                    color: Colors.white,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
-                Positioned(
-                  left: MediaQuery.of(context).size.width * 0.1,
-                  right: MediaQuery.of(context).size.width * 0.1,
-                  bottom: MediaQuery.of(context).size.width * 0.1,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
+      body: CustomScrollView(
+        slivers: [
+          // Course Thumbnail
+          SliverAppBar(
+            backgroundColor: MyColors.primary,
+            expandedHeight: MediaQuery.of(context).size.height * 0.33,
+            elevation: 0,
+            pinned: true,
+            title: Text(
+              "Course Detail",
+              style: MyTypography.titleSmall.copyWith(
+                color: Colors.white,
+              ),
+            ),
+            flexibleSpace: FlexibleSpaceBar(
+              background: Stack(
+                children: [
+                  Opacity(
+                    opacity: 0.5,
                     child: Image.network(
                       widget.course.imageUrl,
-                      width: MediaQuery.of(context).size.width * 0.8,
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.course.title,
-                    style: MyTypography.title,
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        direction: Axis.horizontal,
-                        spacing: 20,
-                        runSpacing: 10,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Container(
-                              color: MyColors.primary.withOpacity(0.1),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 5,
-                              ),
-                              child: Text(
-                                widget.course.level,
-                                style: MyTypography.bodySmall.copyWith(
-                                  color: MyColors.primary,
-                                ),
-                              ),
-                            ),
-                          ),
-                          lessonChildState.when(
-                            data: (lessons) => buildLessonDuration(
-                              Icons.library_books_outlined,
-                              "${lessons.length} Lessons",
-                            ),
-                            loading: () => const SizedBox.shrink(),
-                            error: (error, stack) => const SizedBox.shrink(),
-                          ),
-                          buildLessonDuration(
-                            Icons.av_timer,
-                            widget.course.duration,
-                          ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.8),
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black,
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                  const SizedBox(height: 30),
-                  Text(
-                    'Course Overview',
-                    style: MyTypography.titleSmall,
-                  ),
-                  const SizedBox(height: 10),
-                  ReadMoreText(
-                    widget.course.description,
-                    style: MyTypography.body,
-                    trimMode: TrimMode.Length,
-                    trimCollapsedText: 'Show more',
-                    trimExpandedText: 'Show less',
-                    colorClickableText: MyColors.primary,
-                    trimLength: 180,
-                  ),
-                  const SizedBox(height: 30),
-                  Text(
-                    'Course Contents',
-                    style: MyTypography.titleSmall,
-                  ),
-                  const SizedBox(height: 10),
-                  buildCourseContents(lessonState),
-                  const SizedBox(height: 30),
-                  Text(
-                    'Course Author',
-                    style: MyTypography.titleSmall,
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.network(
-                          widget.course.authorAvatarUrl,
-                          width: 50,
-                          height: 50,
-                        ),
+                  Positioned(
+                    left: MediaQuery.of(context).size.width * 0.1,
+                    right: MediaQuery.of(context).size.width * 0.1,
+                    bottom: MediaQuery.of(context).size.width * 0.07,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        widget.course.imageUrl,
+                        width: MediaQuery.of(context).size.width * 0.8,
                       ),
-                      const SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.course.authorName,
-                            style: MyTypography.body,
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            widget.course.authorJob,
-                            style: MyTypography.bodySmall.copyWith(
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                // Course Info
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 20,
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        widget.course.title,
+                        style: MyTypography.title,
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            direction: Axis.horizontal,
+                            spacing: 20,
+                            runSpacing: 10,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Container(
+                                  color: MyColors.primary.withOpacity(0.1),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 5,
+                                  ),
+                                  child: Text(
+                                    widget.course.level,
+                                    style: MyTypography.bodySmall.copyWith(
+                                      color: MyColors.primary,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              buildLessonDuration(
+                                Icons.library_books_outlined,
+                                "20 Lessons",
+                              ),
+                              buildLessonDuration(
+                                Icons.av_timer,
+                                widget.course.duration,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                // Course Description
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Course Overview',
+                        style: MyTypography.titleSmall,
+                      ),
+                      const SizedBox(height: 10),
+                      ReadMoreText(
+                        widget.course.description,
+                        style: MyTypography.body,
+                        trimMode: TrimMode.Length,
+                        trimCollapsedText: 'Show more',
+                        trimExpandedText: 'Show less',
+                        colorClickableText: MyColors.primary,
+                        trimLength: 180,
+                      ),
+                    ],
+                  ),
+                ),
+                // Course Content
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Course Contents',
+                        style: MyTypography.titleSmall,
+                      ),
+                      const SizedBox(height: 10),
+                      buildCourseContents(lessonState),
+                    ],
+                  ),
+                ),
+                // Course Author
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Course Author',
+                        style: MyTypography.titleSmall,
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Image.network(
+                              widget.course.authorAvatarUrl,
+                              width: 50,
+                              height: 50,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.course.authorName,
+                                style: MyTypography.body,
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                widget.course.authorJob,
+                                style: MyTypography.bodySmall.copyWith(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20)
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
       bottomNavigationBar: BottomAppBar(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

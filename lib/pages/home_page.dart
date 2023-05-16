@@ -68,6 +68,9 @@ class HomePage extends ConsumerWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
+                      // builder: (context) => CourseDetailPage(
+                      //   course: courses[index],
+                      // ),
                       builder: (context) => CourseDetailPage(
                         course: courses[index],
                       ),
