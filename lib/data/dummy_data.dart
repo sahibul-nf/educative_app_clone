@@ -1,4 +1,5 @@
 import '../models/course.dart';
+import '../models/lesson.dart';
 
 final List<Course> courses = [
   Course(
@@ -39,5 +40,73 @@ final List<Course> courses = [
     duration: '6 weeks',
     price: 'Paid',
     status: 'New',
+  ),
+];
+
+// List of dummy lessons
+final List<Lesson> lessons = [
+  Lesson(
+    title: 'Introduction',
+    id: '',
+    courseId: '',
+    lessons: [
+      LessonChild(
+        id: '',
+        title: 'Overview',
+        content: '',
+        isCompleted: false,
+        lessonId: '',
+        createdAt: DateTime.now(),
+      ),
+    ],
+    showDetail: false,
+  ),
+  Lesson(
+    title: 'Setting Up the Project',
+    id: '',
+    courseId: '',
+    lessons: [
+      LessonChild(
+        id: '',
+        title: 'Setting Up the Database',
+        content: '',
+        isCompleted: false,
+        lessonId: '',
+        createdAt: DateTime.now(),
+      ),
+    ],
+    showDetail: false,
+  ),
+  Lesson(
+    title: 'Building the Backend',
+    id: '',
+    courseId: '',
+    lessons: [
+      LessonChild(
+        id: '',
+        title: 'Building the API',
+        content: '',
+        isCompleted: false,
+        lessonId: '',
+        createdAt: DateTime.now(),
+      ),
+    ],
+    showDetail: false,
+  ),
+  Lesson(
+    title: 'Building the Frontend',
+    id: '',
+    courseId: '',
+    lessons: [
+      LessonChild(
+        id: '',
+        title: 'Building the UI',
+        content: '',
+        isCompleted: false,
+        lessonId: '',
+        createdAt: DateTime.now(),
+      ),
+    ],
+    showDetail: false,
   ),
 ];
