@@ -85,155 +85,174 @@ class _NewCourseDetailPageState extends ConsumerState<CourseDetailPage> {
               ),
             ),
           ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                // Course Info
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 20,
+          // Course Info
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 20,
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    widget.course.title,
+                    style: MyTypography.title,
                   ),
-                  child: Column(
+                  const SizedBox(height: 10),
+                  Row(
                     children: [
-                      Text(
-                        widget.course.title,
-                        style: MyTypography.title,
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            direction: Axis.horizontal,
-                            spacing: 20,
-                            runSpacing: 10,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: Container(
-                                  color: MyColors.primary.withOpacity(0.1),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 5,
-                                  ),
-                                  child: Text(
-                                    widget.course.level,
-                                    style: MyTypography.bodySmall.copyWith(
-                                      color: MyColors.primary,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              buildLessonDuration(
-                                Icons.library_books_outlined,
-                                "20 Lessons",
-                              ),
-                              buildLessonDuration(
-                                Icons.av_timer,
-                                widget.course.duration,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                // Course Description
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Course Overview',
-                        style: MyTypography.titleSmall,
-                      ),
-                      const SizedBox(height: 10),
-                      ReadMoreText(
-                        widget.course.description,
-                        style: MyTypography.body,
-                        trimMode: TrimMode.Length,
-                        trimCollapsedText: 'Show more',
-                        trimExpandedText: 'Show less',
-                        colorClickableText: MyColors.primary,
-                        trimLength: 180,
-                      ),
-                    ],
-                  ),
-                ),
-                // Course Content
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Course Contents',
-                        style: MyTypography.titleSmall,
-                      ),
-                      const SizedBox(height: 10),
-                      buildCourseContents(lessonState),
-                    ],
-                  ),
-                ),
-                // Course Author
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Course Author',
-                        style: MyTypography.titleSmall,
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        direction: Axis.horizontal,
+                        spacing: 20,
+                        runSpacing: 10,
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(15),
-                            child: Image.network(
-                              widget.course.authorAvatarUrl,
-                              width: 50,
-                              height: 50,
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                widget.course.authorName,
-                                style: MyTypography.body,
+                            child: Container(
+                              color: MyColors.primary.withOpacity(0.1),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 5,
                               ),
-                              const SizedBox(height: 2),
-                              Text(
-                                widget.course.authorJob,
+                              child: Text(
+                                widget.course.level,
                                 style: MyTypography.bodySmall.copyWith(
-                                  color: Colors.grey,
+                                  color: MyColors.primary,
                                 ),
                               ),
-                            ],
+                            ),
+                          ),
+                          lessonChildState.when(
+                            data: (lessonChild) {
+                              return buildCourseInfo(
+                                Icons.library_books_outlined,
+                                "${lessonChild.length} Lessons",
+                              );
+                            },
+                            error: (error, stackTrace) => const SizedBox(),
+                            loading: () => Shimmer.fromColors(
+                              baseColor: Colors.grey[300]!,
+                              highlightColor: Colors.grey[100]!,
+                              child: Container(
+                                height: 25,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                            ),
+                          ),
+                          buildCourseInfo(
+                            Icons.av_timer,
+                            widget.course.duration,
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20)
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          )
+          ),
+          // Course Description
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 10,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Course Overview',
+                    style: MyTypography.titleSmall,
+                  ),
+                  const SizedBox(height: 10),
+                  ReadMoreText(
+                    widget.course.description,
+                    style: MyTypography.body,
+                    trimMode: TrimMode.Length,
+                    trimCollapsedText: 'Show more',
+                    trimExpandedText: 'Show less',
+                    colorClickableText: MyColors.primary,
+                    trimLength: 180,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // Course Content
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 10,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Course Contents',
+                    style: MyTypography.titleSmall,
+                  ),
+                  const SizedBox(height: 10),
+                  buildCourseContents(lessonState),
+                ],
+              ),
+            ),
+          ),
+          // Course Author
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 10,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Course Author',
+                    style: MyTypography.titleSmall,
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.network(
+                          widget.course.authorAvatarUrl,
+                          width: 50,
+                          height: 50,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.course.authorName,
+                            style: MyTypography.body,
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            widget.course.authorJob,
+                            style: MyTypography.bodySmall.copyWith(
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20)
+                ],
+              ),
+            ),
+          ),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -288,7 +307,7 @@ class _NewCourseDetailPageState extends ConsumerState<CourseDetailPage> {
     );
   }
 
-  buildLessonDuration(IconData icon, String text) {
+  buildCourseInfo(IconData icon, String text) {
     return Row(
       children: [
         Icon(icon, size: 22, color: MyColors.black),
