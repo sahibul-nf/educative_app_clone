@@ -1,7 +1,8 @@
-import 'package:educative_app_clone/models/lesson.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../models/lesson.dart';
 
 final lessonProvider = FutureProvider.autoDispose.family<List<Lesson>, String>(
   (ref, courseId) async {

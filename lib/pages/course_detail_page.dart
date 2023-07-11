@@ -320,7 +320,7 @@ class _NewCourseDetailPageState extends ConsumerState<CourseDetailPage> {
     );
   }
 
-  buildCourseContents(AsyncValue<List<Lesson>> lessonState) {
+  Widget buildCourseContents(AsyncValue<List<Lesson>> lessonState) {
     return lessonState.when(
       data: (lessons) {
         return ExpansionPanelList(

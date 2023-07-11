@@ -1,5 +1,4 @@
 import 'package:any_link_preview/any_link_preview.dart';
-import 'package:educative_app_clone/themes/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
@@ -7,6 +6,8 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:url_launcher/url_launcher.dart';
+
+import '../themes/typography.dart';
 
 class CustomElementBuilder extends MarkdownElementBuilder {
   CustomElementBuilder(this.context);

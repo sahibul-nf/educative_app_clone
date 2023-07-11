@@ -1,12 +1,13 @@
-import 'package:educative_app_clone/controllers/course_controller.dart';
-import 'package:educative_app_clone/pages/course_detail_page.dart';
-import 'package:educative_app_clone/themes/colors.dart';
-import 'package:educative_app_clone/widgets/course_card.dart';
-import 'package:educative_app_clone/widgets/course_list_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../controllers/course_controller.dart';
+import '../themes/colors.dart';
+import '../widgets/course_card.dart';
+import '../widgets/course_list_loading.dart';
+import 'course_detail_page.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -68,9 +69,6 @@ class HomePage extends ConsumerWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      // builder: (context) => CourseDetailPage(
-                      //   course: courses[index],
-                      // ),
                       builder: (context) => CourseDetailPage(
                         course: courses[index],
                       ),

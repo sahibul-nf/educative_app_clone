@@ -1,6 +1,10 @@
-# Setting up the Flutter project and Connect to the Supabase API
+# #4  Setting up the Flutter Project and Connect to the Supabase API
 
-In this section, we will go over the steps to set up a Flutter project for the [educative.io](http://educative.io/) clone app, including adding dependencies and assets. We will also cover how to configure environment variables and connect to the Supabase API using the `supabase_flutter` package. Once we have completed these steps, we will be ready to start building our [educative.io](http://educative.io/) clone app. Let's get started! 🚀
+## Introduction
+
+In this section, we will cover the steps to set up a Flutter project for the [educative.io](http://educative.io/) clone app. This includes adding dependencies and assets, configuring environment variables, and connecting to the Supabase API using the `supabase_flutter` package. Additionally, we will set up the Riverpod state management.
+
+Once these steps are complete, we will be ready to start building our [educative.io](http://educative.io/) clone app. Let's get started! 🚀
 
 ## Project structure
 
@@ -12,6 +16,7 @@ educative_clone_app/
 │   └── ...
 ├── lib/
 │   ├── controllers/
+│   ├── data/
 │   ├── models/
 │   ├── pages/
 │   ├── themes/
@@ -25,12 +30,17 @@ The project structure for our Flutter application is shown above.
 - The `lib` directory contains the source code for our application, organized into different directories based on the purpose of the code.
 - The `pages` directory contains the UI pages of our application.
 - The `widgets` directory contains reusable widgets that can be used on multiple pages.
-- The `themes` directory contains the theme data for our application.
+- The `themes` directory contains the theme data for our application like typography and colors.
 - The `models` directory contains data models used throughout the application.
 - The `controllers` directory contains business logic for our application.
+- The `data` directory contains mock or sample data that is used for testing or demonstration purposes.
 - The `assets` directory contains the assets used in our application, such as images and data files.
 - The `assets/lessons` directory contains the lesson files in markdown format. To save a lesson file in markdown format, we can create a new file with a `.md` extension and save it in the `assets/lessons` directory. We can then load this file in our Flutter application using the `flutter_markdown` package.
 - The `main.dart` file is the entry point for our Flutter application.
+
+To set up the project folder, you can follow this video:
+
+<embed>www.loom.com/embed/ff5dfd8fe85e4b819a43922b5bb6d9c9</embed>
 
 ## Adding Dependencies
 
@@ -66,7 +76,7 @@ Once we have added the dependencies to the `pubspec.yaml` file, we can run the `
 
 To download the assets for this Flutter project, please follow the URL below:
 
-[](https://devmvhbamfosnfrpcjve.supabase.co/storage/v1/object/public/assets/assets.zip)
+[Assets](https://github.com/sahibul-nf/educative_clone_guide/raw/main/assets/assets.zip)
 
 This URL will take you to a page where you can download a `.zip` file containing all the assets for this project. Once you have downloaded the file, you can extract the contents to the `assets` directory in the root directory of your Flutter project.
 
@@ -188,18 +198,44 @@ In the code above, we first ensure that the Flutter bindings are initialized by 
 
 After setting up the `Supabase` object, we can use it to interact with the Supabase API in our Flutter application.
 
+## Setup Flutter Riverpod Package
+
+To use the `flutter_riverpod` package, we need to wrap our `MaterialApp()` widget with the `ProviderScope()` widget to enable state management with `flutter_riverpod`. This allows us to use the `Provider()` and `Consumer()` widgets to manage and access the state throughout our application.
+
+The `main()` function in the `main.dart` file will look something like this:
+
+```dart
+import 'package:flutter_riverpod/flutter_riverpod.dart';   // import this
+
+void main() async {
+  // ...
+
+  runApp(
+    ProviderScope(
+      child: const MyApp(),
+    ),
+  );
+}
+
+```
+
+With `flutter_riverpod` set up, we can start using it to manage the state in our Flutter application. 
+
 ## Conclusion
 
-Congratulations! You have successfully set up our Flutter project ****and added dependencies and assets to it. You have also learned how to configure environment variables using a `.env` file and use the `supabase_flutter` package to connect with the Supabase API. Now we are ready to start building our [educative.io](http://educative.io) Clone App! Happy coding! 🚀
+Congratulations on successfully setting up our Flutter project, adding dependencies and assets, configuring environment variables using a `.env` file, and using the `supabase_flutter` package to connect with the Supabase API. We have also set up the Riverpod state management.
+
+Now, we are ready to start building our [educative.io](http://educative.io/) clone app! Happy coding! 🚀
 
 Full `main.dart` code:
 
 ```dart
-import 'package:educative_app_clone/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'pages/home_page.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -214,7 +250,11 @@ void main() async {
     anonKey: supabaseAnonKey,
   );
 
-  runApp(const MyApp());
+  runApp(
+    ProviderScope(
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -222,18 +262,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ProviderScope(
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Educative',
-        home: HomePage(),
-      ),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Educative',
     );
   }
 }
 ```
-
-In the code above, we wrap our `MaterialApp()` widget with the `ProviderScope()` widget to enable state management with `flutter_riverpod`. This allows us to use the `Provider()` and `Consumer()` widgets to manage and access the state throughout our application.
 
 Full `pubspec.yaml` code:
 

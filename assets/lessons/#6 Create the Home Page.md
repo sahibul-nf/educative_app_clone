@@ -1,10 +1,10 @@
-# Creating the Home Page
+# #6  Create the Home Page
 
 ## Introduction
 
 The home page is the first thing users see when they visit an app. Therefore, it is essential to make a good first impression and provide a clear indication of what the app is all about. This section will guide you through creating the home page for the [educative.io](http://educative.io/) clone with Flutter. 
 
-Let's get started!
+Let's get started! 🚀
 
 ## Let’s Get Started
 
@@ -20,9 +20,17 @@ Okay, if already installed the Flutter Riverpod Snippets extension. Now, let’s
 
 Inside `lib/pages` create a new file called `home_page.dart`.
 
-### Step 2 - Create a StatelessWidget
+![Screenshot 2023-05-28 at 16.10.35.png](https://github.com/sahibul-nf/educative_app_clone/blob/main/screenshots/image.png?raw=true)
 
-After creating the `home_page.dart` file, the next step is to create a `StatelessWidget` that will represent our home page. We will name it `HomePage`.
+
+### Step 2 - Create a ConsumerWidget
+
+<aside>
+💡 `ConsumerWidget` is a widget provided by the Flutter Riverpod package to help manage the state of an application. It is similar to `StatefulWidget` but has the added benefit of being able to rebuild only when the state it is watching has changed, increasing the efficiency of the application. It is used to connect a widget to the state management system and render the UI based on the current state of the application.
+
+</aside>
+
+After creating the `home_page.dart` file, the next step is to create a `ConsumerWidget` that will represent our home page. We will name it `HomePage`.
 
 The `HomePage` widget will return a `Scaffold` widget, which provides us with a framework for implementing the basic material design visual layout structure of the app.
 
@@ -30,12 +38,13 @@ Inside the `Scaffold` widget, we will call two parameters: `appBar` and `body`.
 
 ```dart
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: ,
       body: ,
@@ -92,16 +101,17 @@ Populate the `home_page.dart` file so far should look something like this:
 
 ```dart
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 **import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../themes/colors.dart';**
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       **appBar: AppBar(
         backgroundColor: Colors.white,
@@ -184,7 +194,7 @@ To create the `CourseCard` widget, we need to create a new file called `course_c
 
 After that, we can copy and paste the code snippet provided below to create the `CourseCard` widget. This widget is a custom widget that displays the course title, author info, course thumbnail image, and course level.
 
-Add the following code snippet to create the `CourseCard` widget in the `lib/widgets` directory:
+Add the following code snippet to create the `CourseCard` widget in the `lib/widgets/course_card.dart` file:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -335,7 +345,7 @@ To create the `LevelIndicator` widget, we need to create a new file called `leve
 
 After that, we can copy and paste the code snippet provided below to create the `LevelIndicator` widget. This widget is a custom widget that displays the course level as a colored dot.
 
-Add the following code snippet to create the `LevelIndicator` widget in the `lib/widgets` directory:
+Add the following code snippet to create the `LevelIndicator` widget in the `lib/widgets/level_indicator.dart` file:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -409,7 +419,7 @@ So, be sure to add the line `import 'level_indicator.dart';` inside the `course_
 
 ### Step 6 - Define the Course class
 
-To define the `Course` class, we need to create a new file called `course.dart` inside the `lib/models` directory. 
+To define the `Course` class, we need to create a new file called `course.dart` inside the `lib/models` directory.  
 
 Course Class is a representation of a course table in the database that contains course-related information.
 
@@ -478,7 +488,7 @@ final List<Course> courses = [
     authorAvatarUrl: 'https://i.pravatar.cc/150?img',
     authorJob: 'Senior Software Engineer',
     imageUrl: 'https://www.educative.io/cdn-cgi/image/format=auto,width=950,quality=75/v2api/collection/10370001/6069685319630848/image/6492564120141824',
-    description: 'Learn how to build educative.io clone with Flutter and Supabase.',
+    description: 'Learn how to build educative.io clone with Flutter and Supabase. This course is free and open source. You can find the source code on GitHub.',
     level: 'Beginner',
     duration: '2 weeks',
     price: 'Free',
@@ -531,9 +541,9 @@ Here's the updated code for the `home_page.dart` file:
 import '../data/dummy_data.dart';   // Import courses list
 ...
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
 				...
@@ -585,7 +595,11 @@ void main() async {
     anonKey: supabaseAnonKey,
   );
 
-	runApp(const MyApp());
+	runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -593,12 +607,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ProviderScope(
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Educative',
-        home: HomePage(),
-      ),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Educative',
+      **home: HomePage(),      // <-- set this line**
     );
   }
 }
@@ -606,12 +618,13 @@ class MyApp extends StatelessWidget {
 
 In this updated code, we set the `HomePage` widget as the value of the `home` property in the `MaterialApp` widget. When we run the app, the `HomePage` widget will be displayed first.
 
-### Full home_page.dart file
+## Full home_page.dart file
 
 Here is the full code for the `HomePage` widget in the `home_page.dart` file:
 
 ```dart
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -619,9 +632,9 @@ import '../data/dummy_data.dart';
 import '../themes/colors.dart';
 import '../widgets/course_card.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -684,7 +697,7 @@ class HomePage extends StatelessWidget {
 
 ```
 
-### Testing the App
+## Testing the App
 
 Let's test our app. Run the application on an emulator or actual device using the command in a terminal. The command `flutter run` will build the app and install it on your device.
 

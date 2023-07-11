@@ -1,9 +1,10 @@
-import 'package:educative_app_clone/models/course.dart';
-import 'package:educative_app_clone/themes/colors.dart';
-import 'package:educative_app_clone/themes/typography.dart';
-import 'package:educative_app_clone/widgets/level_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../models/course.dart';
+import '../themes/colors.dart';
+import '../themes/typography.dart';
+import 'level_indicator.dart';
 
 class CourseCard extends ConsumerStatefulWidget {
   const CourseCard(

@@ -1,7 +1,8 @@
-import 'package:educative_app_clone/pages/home_page.dart';
-import 'package:educative_app_clone/themes/colors.dart';
-import 'package:educative_app_clone/themes/typography.dart';
 import 'package:flutter/material.dart';
+
+import '../themes/colors.dart';
+import '../themes/typography.dart';
+import 'home_page.dart';
 
 class CourseFinishPage extends StatelessWidget {
   const CourseFinishPage({super.key});

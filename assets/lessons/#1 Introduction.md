@@ -1,4 +1,4 @@
-# Introduction
+# #1  Introduction
 
 ## Overview
 
@@ -32,10 +32,18 @@ The architecture of the application will consist of three main components: the f
 
 Here is a diagram that illustrates the architecture of our application:
 
-![https://raw.githubusercontent.com/sahibul-nf/educative_app_clone/main/screenshots/architecture-schema.png](https://raw.githubusercontent.com/sahibul-nf/educative_app_clone/main/screenshots/architecture-schema.png "Architecture Schema")
+![Architecture Schema](https://raw.githubusercontent.com/sahibul-nf/educative_app_clone/main/screenshots/architecture-schema.png)
+
+Architecture Schema
 
 ## Database schema
 
 The database schema will consist of two tables: courses, and lessons. The course table will store information about each course, such as the course name, description, and price. The lessons table will store information about each lesson of a course, such as a lesson name, description, and content. These tables will be hosted on Supabase and accessed using the Flutter Supabase SDK to provide data to the front end of our application.
 
-![https://raw.githubusercontent.com/sahibul-nf/educative_app_clone/main/screenshots/supbase-schema.png](https://raw.githubusercontent.com/sahibul-nf/educative_app_clone/main/screenshots/supbase-schema.png "Database Schema")
+![Database Schema](https://raw.githubusercontent.com/sahibul-nf/educative_app_clone/main/screenshots/supbase-schema.png)
+
+Database Schema
+
+## Conclusion
+
+In conclusion, this tutorial aims to provide a comprehensive guide to building an education platform using Flutter and Supabase. By the end of this tutorial, you will have gained valuable knowledge about these technologies and how to use them together to create powerful applications. We hope you enjoy following along and building your own [educative.io](http://educative.io/) clone!

@@ -1,14 +1,15 @@
-import 'package:educative_app_clone/controllers/lesson_controller.dart';
-import 'package:educative_app_clone/models/course.dart';
-import 'package:educative_app_clone/models/lesson.dart';
-import 'package:educative_app_clone/pages/course_finish_page.dart';
-import 'package:educative_app_clone/themes/colors.dart';
-import 'package:educative_app_clone/themes/typography.dart';
-import 'package:educative_app_clone/widgets/lesson_content.dart';
-import 'package:educative_app_clone/widgets/lesson_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../controllers/lesson_controller.dart';
+import '../models/course.dart';
+import '../models/lesson.dart';
+import '../themes/colors.dart';
+import '../themes/typography.dart';
+import '../widgets/lesson_content.dart';
+import '../widgets/lesson_loading.dart';
+import 'course_finish_page.dart';
 
 class LessonPage extends ConsumerStatefulWidget {
   const LessonPage({super.key, required this.course});
@@ -145,8 +146,6 @@ class _LessonPageState extends ConsumerState<LessonPage> {
     bool isLastPage,
     List<LessonChild> lessons,
   ) {
-    final isCompletedAll =
-        lessons.every((lesson) => lesson.isCompleted == true);
     // Back Button, Next Button and Completed Button
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 40),
@@ -208,7 +207,7 @@ class _LessonPageState extends ConsumerState<LessonPage> {
                   OutlinedButton(
                     onPressed: () {
                       if (isLastPage) {
-                        finishLesson(isCompletedAll);
+                        finishLesson(lessons);
                       } else {
                         nextPage();
                       }
@@ -296,7 +295,10 @@ class _LessonPageState extends ConsumerState<LessonPage> {
     });
   }
 
-  void finishLesson(bool isCompletedAll) {
+  void finishLesson(List<LessonChild> lessons) {
+    final isCompletedAll =
+        lessons.every((lesson) => lesson.isCompleted == true);
+
     if (isCompletedAll) {
       // showDialog to confirm finish lesson
       showDialog(

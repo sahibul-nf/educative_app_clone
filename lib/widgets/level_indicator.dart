@@ -1,5 +1,6 @@
-import 'package:educative_app_clone/themes/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../themes/colors.dart';
 
 class LevelIndicator extends StatelessWidget {
   const LevelIndicator({super.key, required this.level});

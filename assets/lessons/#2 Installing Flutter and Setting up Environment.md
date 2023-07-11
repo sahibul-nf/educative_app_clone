@@ -1,6 +1,8 @@
-# Installing Flutter and Setting up Environment for Coding using VS Code
+# #2  Installing Flutter and Setting up Environment for Coding using VS Code
 
-This guide will walk you through the process of installing Flutter and setting up your environment for coding using Visual Studio Code.
+## Introduction
+
+This guide will walk you through the process of installing Flutter and setting up your environment for coding using Visual Studio Code. So, let’s get started! 🚀
 
 ## Installing Flutter
 
@@ -81,8 +83,8 @@ To run or debug your Flutter app in Visual Studio Code, you can use the followin
 
 As a suggestion, you can also use the VS Code Run and Debug panel to start, stop and manage your Flutter app. To access this panel, click on the Run and Debug icon in the left sidebar of the VS Code window. From the panel, you can select your Flutter app and choose to run, debug or stop it. You can also add breakpoints, inspect variables, and more.
 
-![https://www.loom.com/i/f885622481ec439cada53749df29f848](https://cdn.loom.com/images/originals/f885622481ec439cada53749df29f848.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4ubG9vbS5jb20vaW1hZ2VzL29yaWdpbmFscy9mODg1NjIyNDgxZWM0MzljYWRhNTM3NDlkZjI5Zjg0OC5qcGciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE2ODA0NzI4OTJ9fX1dfQ__&Key-Pair-Id=APKAJQIC5BGSW7XXK7FQ&Signature=SvrD0AT5kTfQDoIsBDfohMAmNLhCyUVHlQQnich4334EMRA574qxh5xkC35tvfn9DsRujpJmjZWptWvsNHq4r4S1di1IJ28WZDMiTRoNqQPJaUsCxZFH7hBKxVOTxLgQMD8Esu2FLHbdUVGHfHedCMWeGyrFZxyqy959LxNwH6Cg4J1ujzfiH-8WGyL-3QExhfcBlqqrjA5saoswfAvGP1mgwV-BoOXm3w6yP8DdSud6Aal-nmTy81ejwDGlRRvC52PLN5ml9BRFyrgaH-6pM0%7E-zo89jAUQ6CCz0Oq0ueCRqWT3hIph74hX5YY8zVP8Tt9SJIKPC1Rgqd52U7G1zA__ "App Preview")
+![https://cdn.loom.com/images/originals/f885622481ec439cada53749df29f848.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4ubG9vbS5jb20vaW1hZ2VzL29yaWdpbmFscy9mODg1NjIyNDgxZWM0MzljYWRhNTM3NDlkZjI5Zjg0OC5qcGciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE2ODkwMTMzOTF9fX1dfQ__&Key-Pair-Id=APKAJQIC5BGSW7XXK7FQ&Signature=p~r8xq3gMMrd3SUJ451SS2xbmuy1NyrzKC4OSLWZrWC2-EivFlWWEH61RVBSGRi4lzGFMZj3yXlJOqJh8rq0VDGK7KpsdBnUBXl03E4xbCINYokXpNDQiJdf5~1~F3eclwPSETRxbx8eAPJ-AjHzcUoKRgYChjblFKx~H9wMR0hnONRrTO7rpNubU459OCUYh6LjVk59CPJ7UYVGTVG-RpvfcBOs~MjjqcVrK~FooQJyBMSND8cV6fwvFqDJVDoI-dmcrdRcE2x0Ib9DTSPhafulRbvd-pxWPQ5hteCoYBY3LP3yPMwl1ACll8W6QBz1qRFCxgOzIQJd3bdk4aDYuQ__&_gl=1*1a4xlst*_gcl_au*MTY5NTgzNTY1MC4xNjgyMDcyMjYx](https://cdn.loom.com/images/originals/f885622481ec439cada53749df29f848.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4ubG9vbS5jb20vaW1hZ2VzL29yaWdpbmFscy9mODg1NjIyNDgxZWM0MzljYWRhNTM3NDlkZjI5Zjg0OC5qcGciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE2ODkwMTMzOTF9fX1dfQ__&Key-Pair-Id=APKAJQIC5BGSW7XXK7FQ&Signature=p~r8xq3gMMrd3SUJ451SS2xbmuy1NyrzKC4OSLWZrWC2-EivFlWWEH61RVBSGRi4lzGFMZj3yXlJOqJh8rq0VDGK7KpsdBnUBXl03E4xbCINYokXpNDQiJdf5~1~F3eclwPSETRxbx8eAPJ-AjHzcUoKRgYChjblFKx~H9wMR0hnONRrTO7rpNubU459OCUYh6LjVk59CPJ7UYVGTVG-RpvfcBOs~MjjqcVrK~FooQJyBMSND8cV6fwvFqDJVDoI-dmcrdRcE2x0Ib9DTSPhafulRbvd-pxWPQ5hteCoYBY3LP3yPMwl1ACll8W6QBz1qRFCxgOzIQJd3bdk4aDYuQ__&_gl=1*1a4xlst*_gcl_au*MTY5NTgzNTY1MC4xNjgyMDcyMjYx)
 
 ## Conclusion
 
-Congratulations! You have successfully installed Flutter and set up your environment for coding using Visual Studio Code. Now you can start building beautiful and performant mobile apps with Flutter. Happy coding! 🚀
+Congratulations! You have successfully installed Flutter and set up your environment for coding using Visual Studio Code. Now you can start building beautiful and performant mobile apps with Flutter. Happy coding! ⚡︎

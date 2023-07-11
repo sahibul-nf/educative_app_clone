@@ -1,6 +1,7 @@
-import 'package:educative_app_clone/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'colors.dart';
 
 class MyTypography {
   static TextStyle title = GoogleFonts.nunitoSans(
