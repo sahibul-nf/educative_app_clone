@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/lesson.dart';
@@ -11,11 +11,18 @@ class LessonContent extends StatelessWidget {
   final LessonChild lesson;
   final Widget child;
 
+  // load the lesson content
+  Future<String> loadContent() async {
+    print(lesson.content);
+    final res = await http.get(Uri.parse(lesson.content));
+    print(res.body);
+    return res.body;
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: NetworkAssetBundle(Uri.parse(lesson.content))
-          .loadString(lesson.content),
+      future: loadContent(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return SingleChildScrollView(
