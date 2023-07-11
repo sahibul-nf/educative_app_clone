@@ -1,0 +1,10 @@
+title,image_url,description,level,duration,price,author,author_avatar_url,status,created_at,id,author_job
+Build educative.io clone with Flutter and Supabase,"https://www.educative.io/cdn-cgi/image/format=auto,width=950,quality=75/v2api/collection/10370001/6069685319630848/image/6492564120141824","In this short course, you will learn how to build an educative.io clone using Flutter and Supabase. The course will cover the creation of three main features: Home, Course Detail, and Lesson.
+
+The Home feature will display a list of courses available on the platform. You will learn how to use Flutter to create a user-friendly interface that allows users to easily navigate through the list of courses.
+
+The Course Detail feature will display the details of a selected course. You will learn how to use Supabase to store and retrieve course information, and how to use Flutter to display this information in an organized and visually appealing way.
+
+The Lesson feature will display the lessons of a selected course. You will learn how to use Flutter to create a dynamic interface that allows users to easily navigate through the lessons of a course.
+
+By the end of this course, you will have a solid understanding of how to use Flutter and Supabase to build a fully functional educative.io clone. You will also have the skills to customize and expand upon this clone to create your own unique e-learning platform.",Intermediate,13 hours,$0.00,Sahibul,https://i.pravatar.cc/150?img,,2023-04-06 20:28:38.955421+00,8026cad8-d667-484c-935f-3fa4e9151bcc,Flutter Developer
