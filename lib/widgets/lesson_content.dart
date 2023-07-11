@@ -14,7 +14,8 @@ class LessonContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: rootBundle.loadString(lesson.content),
+      future: NetworkAssetBundle(Uri.parse(lesson.content))
+          .loadString(lesson.content),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return SingleChildScrollView(

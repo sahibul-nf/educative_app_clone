@@ -14,7 +14,7 @@ To get started with Supabase, you will need to sign up for a free account on the
 
 Once you have set up your account, you will need to create a new project. From the Supabase dashboard, click on the "**New Project**" button and enter a name for your project. You will also need to select a region where your data will be stored. It is important to choose a region that is closest to your users, as this will help to reduce latency and improve the performance of your application. 
 
-[https://www.loom.com/embed/64d3a3365e02418d8e2368b2b1066d64](https://www.loom.com/embed/64d3a3365e02418d8e2368b2b1066d64)
+<embed>https://www.loom.com/embed/64d3a3365e02418d8e2368b2b1066d64</embed>
 
 ## Step 3: Create tables
 
@@ -50,7 +50,7 @@ create table
 
 The `public.course` table will store information about each course in your Supabase database. It contains fields such as the course title, image URL, description, level, duration, price, author, author avatar URL, status, creation date, and author job. A primary key constraint is also applied on the `id` field to ensure each course has a unique identifier.
 
-[https://www.loom.com/embed/784cadecca45402cba2b2cd298bb386c](https://www.loom.com/embed/784cadecca45402cba2b2cd298bb386c)
+<embed>https://www.loom.com/embed/784cadecca45402cba2b2cd298bb386c</embed>
 
 ### Create a `lesson` table
 
@@ -69,7 +69,7 @@ create table
 
 The `public.lesson` table is used to store information about each lesson in your Supabase database. It includes fields such as the lesson title, course ID, and creation date. A primary key constraint is added to the `id` field, and a foreign key constraint is applied on the `course_id` field to ensure each lesson is associated with the correct course in the `public.course` table.
 
-[https://www.loom.com/share/f00e161fcb3d47b8829ed86b3a4e7621](https://www.loom.com/share/f00e161fcb3d47b8829ed86b3a4e7621)
+<embed>https://www.loom.com/embed/f00e161fcb3d47b8829ed86b3a4e7621</embed>
 
 ### Create a `lesson_child` table
 
@@ -90,7 +90,7 @@ create table
 
 Finally, the `public.lesson_child` table is used to store information about each child lesson in your Supabase database. It includes fields such as the lesson child title, content, completion status, and parent lesson ID. A primary key constraint is applied on the `id` field, and a foreign key constraint is added on the `lesson_parent_id` field to ensure each child lesson is associated with the correct parent lesson in the `public.lesson` table.
 
-[https://www.loom.com/share/9214260f34b24d409bae062095840428](https://www.loom.com/share/9214260f34b24d409bae062095840428)
+<embed>https://www.loom.com/embed/9214260f34b24d409bae062095840428</embed>
 
 ## Conclusion
 
