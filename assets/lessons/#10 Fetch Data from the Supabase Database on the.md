@@ -12,7 +12,7 @@ Before we define the function to retrieve Courses data from Supabase, firstly we
 
 Please follow the link below to download the course data in a CSV file.
 
-<link-preview>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/sahibul-nf/educative_app_clone/blob/main/docs/course_rows.csv</link-preview>
+[course_rows.csv](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/sahibul-nf/educative_app_clone/blob/main/docs/course_rows.csv)
 
 After downloading the file, we need to insert the course data into the `course` table in the Supabase Database. To see how to do this, please watch the video below on inserting data from a CSV file to the `course` table in the Supabase Database.
 

@@ -16,9 +16,9 @@ Same as the previous section, before we define the function to retrieve lesson d
 
 Please follow the link below to download the lesson and the lesson_child data in a CSV file.
 
-<link-preview>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/sahibul-nf/educative_app_clone/blob/main/docs/lesson_rows.csv</link-preview>
+[lesson_rows.csv](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/sahibul-nf/educative_app_clone/blob/main/docs/lesson_rows.csv)
 
-<link-preview>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/sahibul-nf/educative_app_clone/blob/main/docs/lesson_child_rows.csv</link-preview>
+[lesson_child_rows.csv](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/sahibul-nf/educative_app_clone/blob/main/docs/lesson_child_rows.csv)
 
 After downloading the file, we need to insert the lesson data into the `lesson` table in the Supabase Database. To see how to do this, please watch the video below on inserting data from a CSV file to the `lesson` table in the Supabase Database.
 
